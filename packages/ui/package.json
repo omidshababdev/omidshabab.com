@@ -7,6 +7,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
+    "@types/node": "^20",
     "@types/react": "^18.2.61",
     "autoprefixer": "^10.4.18",
     "postcss": "^8.4.35",
@@ -17,15 +18,18 @@
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-checkbox": "^1.0.4",
+    "@radix-ui/react-context-menu": "^2.2.1",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-navigation-menu": "^1.2.0",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "flowbite-typography": "^1.0.3",
     "lucide-react": "^0.359.0",
     "mini-svg-data-uri": "^1.4.4",
     "react-hook-form": "^7.51.2",

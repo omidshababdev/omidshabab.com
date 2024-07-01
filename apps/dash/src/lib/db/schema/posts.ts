@@ -17,9 +17,10 @@ export const posts = pgTable("posts", {
     .primaryKey()
     .$defaultFn(() => nanoid()),
   title: varchar("title", { length: 150 }).notNull(),
-  desc: json("desc").notNull(),
+  desc: text("desc").notNull(),
+  image: varchar("image", { length: 500 }).notNull(),
   slug: varchar("slug", { length: 100 }).notNull().unique(),
-  published: boolean("published").notNull().default(false),
+  published: boolean("published").default(false),
   userId: varchar("user_id", { length: 256 }).notNull(),
 
   createdAt: timestamp("created_at")

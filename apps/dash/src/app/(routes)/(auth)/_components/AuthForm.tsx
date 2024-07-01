@@ -1,17 +1,17 @@
+import { RedoIcon, UndoIcon } from "lucide-react"
 import { Form, FormField } from "@repo/ui/components/ui/form"
 import { Input } from "@repo/ui/components/ui/input"
 import { cn } from "@repo/ui/lib/utils"
 import { englishBricolageGrotesqueFont } from "@/lib/fonts"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
-import { useForm } from "react-hook-form"
+import { FieldValues, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { emailFormSchema, passwordFormSchema } from "@/lib/validations/auth"
 import React, { useState } from "react"
 import { AuthFormEmailSchema, AuthFormPasswordSchema, AuthFormSchema } from "@/types"
 import GoogleButton from "./GoogleButton"
 import IconButton from "@/components/buttons/icon-button"
-import { RedoIcon, UndoIcon } from "lucide-react"
 import GithubButton from "./GithubButton"
 import TextButton from "@/components/buttons/text-button"
 import { useRouter } from "next/navigation"
@@ -108,7 +108,7 @@ const AuthForm = () => {
                                    <FormField
                                         control={authEmailForm.control}
                                         name="email"
-                                        render={({ field }) => (
+                                        render={({ field }: { field: FieldValues }) => (
                                              <Input
                                                   id="email"
                                                   dir="ltr"
@@ -140,6 +140,7 @@ const AuthForm = () => {
                          </Form>
                     </div>
                }
+
                {authStep === "password" &&
                     <div className="flex flex-col gap-y-10">
                          <div className="text-[25px] sm:text-[30px] text-slate-800 font-bold leading-[3rem] sm:leading-[3.5rem] cursor-text">
@@ -152,7 +153,7 @@ const AuthForm = () => {
                                    <FormField
                                         control={authPasswordForm.control}
                                         name="password"
-                                        render={({ field }) => (
+                                        render={({ field }: { field: FieldValues }) => (
                                              <Input
                                                   id="password"
                                                   dir="ltr"
@@ -179,13 +180,14 @@ const AuthForm = () => {
                                                   authPasswordForm.reset()
                                                   setAuthStep("email")
                                              }}
+                                             animateOnHover
                                              disabled={isLoading}
-                                             className="flex w-min text-[20px] font-bold py-[30px] px-[25px] rounded-[12px] transform hover:-translate-y-1 transition duration-400"
+                                             className="flex w-min text-[20px] font-bold transform hover:-translate-y-1 transition duration-400"
                                         >
                                              {direction === "ltr" ?
-                                                  <UndoIcon size={30} className="text-orange-600" />
+                                                  <UndoIcon className="size-[22px] sm:size-[30px] text-orange-600" />
                                                   :
-                                                  <RedoIcon size={30} className="text-orange-600" />
+                                                  <RedoIcon className="size-[22px] sm:size-[30px] text-orange-600" />
                                              }
                                         </IconButton>
 

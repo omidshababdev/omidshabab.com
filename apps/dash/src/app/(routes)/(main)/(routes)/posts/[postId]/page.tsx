@@ -15,7 +15,7 @@ const Page = async ({
      const { posts } = await api.posts.getPosts.query();
      const result = await api.posts.getPostById.query({ id: postId });
 
-     if (postId === "edit" || posts.some((post) => post.id === postId)) {
+     if (postId === "create" || posts.some((post) => post.id === postId)) {
           return <PostEditor postId={result?.post?.id} />
      } else {
           notFound()

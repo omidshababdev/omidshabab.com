@@ -1,0 +1,57 @@
+{
+  "general": {
+    "omidshabab": "امید شباب",
+    "omidshabab.": "امید شباب.",
+    "dashboard": "داشبورد",
+    "create": "create",
+    "language": "زبان",
+    "lorem": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"
+  },
+  "metadata": {
+    "name": "امید شباب",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure mollitia at consectetur ducimus expedita minus debitis nisi perspiciatis accusantium asperiores, vero libero ab quisquam quod sed eius sequi rem nam!"
+  },
+  "register_metadata": {
+    "title": "register",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure mollitia at consectetur ducimus expedita minus debitis nisi perspiciatis accusantium asperiores, vero libero ab quisquam quod sed eius sequi rem nam!"
+  },
+  "dashboard_metadata": {
+    "title": "dashboard",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure mollitia at consectetur ducimus expedita minus debitis nisi perspiciatis accusantium asperiores, vero libero ab quisquam quod sed eius sequi rem nam!"
+  },
+  "posts_metadata": {
+    "title": "posts",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure mollitia at consectetur ducimus expedita minus debitis nisi perspiciatis accusantium asperiores, vero libero ab quisquam quod sed eius sequi rem nam!"
+  },
+  "not_found": {
+    "title": "صفحه ای که دنبالش بودی پیدا نشد",
+    "description": "می تونی دوباره جستجوش کنی یا به صفحه اصلی برگردی!",
+    "button": "بازگشت به صفحه اصلی"
+  },
+  "languages": {
+    "english": "انگلیسی",
+    "persian": "فارسی"
+  },
+  "navigation": {
+    "home": "صفحه اصلی",
+    "about": "درباره"
+  },
+  "home": {
+    "title": "امید شباب",
+    "description": "نحوه طراحی ☡، ساخت ⏚ و مدیریت 〄 اهدافی که برایتان اهمیت دارند. این کار را همراه با رودی مپ انجام دهید.",
+    "get_started": "همین الان شروع کنید"
+  },
+  "register": {
+    "title": "ورود به حساب کاربری",
+    "description": "فرقی نمی کنه حساب کاربری داری یا نه، برای ورود آدرس ایمیلت رو وارد کن. من یک لینک تأیید برات از طریق ایمیل ارسال می کنم.",
+    "submit_email": "تاییدیه رو به ایمیلم ارسال کن",
+    "google": "ورود به حساب کاربری با گوگل",
+    "github": "ورود به حساب کاربری با گیت هاب",
+    "in_progress": "یک لحظه صبر کن. در حال انجام است ...",
+    "success": "خیلی خوش آمدی 😊 ورودت موفقیت آمیز بود",
+    "error": "ورودت موفقیت آمیز نبود. باید دوباره امتحان کنی یا با پشتیبانی در تماس باشی 😔"
+  },
+  "server": {
+    "error": "An error occurred while trying to connect to the server."
+  }
+}

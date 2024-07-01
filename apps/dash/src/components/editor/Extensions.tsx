@@ -1,5 +1,5 @@
 import {
-     // TiptapImage,
+     TiptapImage,
      TiptapLink,
      UpdatedImage,
      // TaskList,
@@ -19,25 +19,25 @@ const placeholder = Placeholder;
 const tiptapLink = TiptapLink.configure({
      HTMLAttributes: {
           class: cx(
-               "text-text underline underline-offset-[1px] hover:text-primary transition-colors cursor-pointer",
+               "text-text no-underline hover:text-primary transition-colors cursor-pointer",
           ),
      },
 });
 
-// const tiptapImage = TiptapImage.extend({
-//      addProseMirrorPlugins() {
-//           return [
-//                UploadImagesPlugin({
-//                     imageClass: cx("opacity-40 rounded-lg border border-stone-200"),
-//                }),
-//           ];
-//      },
-// }).configure({
-//      allowBase64: true,
-//      HTMLAttributes: {
-//           class: cx("rounded-lg border border-muted"),
-//      },
-// });
+const tiptapImage = TiptapImage.extend({
+     addProseMirrorPlugins() {
+          return [
+               UploadImagesPlugin({
+                    imageClass: cx("opacity-40 rounded-lg border border-stone-200"),
+               }),
+          ];
+     },
+}).configure({
+     allowBase64: true,
+     HTMLAttributes: {
+          class: cx("rounded-lg border border-muted"),
+     },
+});
 
 const updatedImage = UpdatedImage.configure({
      HTMLAttributes: {
@@ -111,7 +111,7 @@ export const defaultExtensions = [
      starterKit,
      placeholder,
      tiptapLink,
-     // tiptapImage,
+     tiptapImage,
      updatedImage,
      // taskList,
      // taskItem,

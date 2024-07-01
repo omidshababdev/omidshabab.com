@@ -18,7 +18,8 @@ import { useEffect, useState } from "react";
 import { cn } from "@repo/ui/lib/utils";
 import { englishBricolageGrotesqueFont } from "@/lib/fonts";
 import { dashRoutes } from "@/config/routes";
-import { createSlug } from "@/lib/utils";
+import { createSlug, generateRandomString } from "@/lib/utils";
+import { onUpload } from "../editor/ImageUpload";
 
 const { TextArea } = Input;
 
@@ -26,16 +27,20 @@ const PostForm = ({ post }: { post?: Post }) => {
      const editing = !!post?.id;
 
      const router = useRouter();
-     const utils = trpc.useUtils(); // Ensure the trpc context is used correctly
+     const utils = trpc.useUtils();
 
      const [title, setTitle] = useState<string>(post?.title ?? "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis pariatur quos possimus beatae")
 
-     const [desc, setDesc] = useState<JSONContent>(post?.desc ?? defaultEditorValue);
+     const [desc, setDesc] = useState<JSONContent>((post && post.desc) ? (JSON.parse(post.desc)) : defaultEditorValue);
 
      const [slug, setSlug] = useState<string>(post?.slug ?? createSlug(title))
 
+     const [image, setImage] = useState<string>(post?.image ?? "")
+
+     const [published, setPublished] = useState<boolean>(post?.published ?? false)
+
      useEffect(() => {
-          if (post?.slug === "" || post?.slug === undefined || post.slug === "post-slug") setSlug(createSlug(title))
+          if (post?.slug === "" || post?.slug === undefined) setSlug(createSlug(title))
      }, [post?.slug, title])
 
      const form = useForm<z.infer<typeof insertPostParams>>({
@@ -82,17 +87,56 @@ const PostForm = ({ post }: { post?: Post }) => {
           onError: (err) => onError("update", { error: err.message }),
      });
 
-     const { mutate: deletePost, isLoading: isDeleting } = trpc.posts.deletePost.useMutation({
-          onSuccess: () => onSuccess("delete"),
-          onError: (err) => onError("delete", { error: err.message }),
-     });
-
      const handleSubmit = (values: NewPostParams) => {
           if (editing) {
                updatePost({ ...values, id: post.id });
           } else {
                createPost(values);
           }
+     };
+
+     const handlePostCover = (file: File) => {
+          const promise = fetch("/api/upload", {
+               method: "POST",
+               headers: {
+                    "content-type": file?.type || "application/octet-stream",
+                    "x-vercel-filename": file?.name || "image.png",
+               },
+               body: file,
+          });
+
+          return new Promise((resolve) => {
+               toast.promise(
+                    promise.then(async (res) => {
+                         // Successfully uploaded image
+                         if (res.status === 200) {
+                              const { url } = (await res.json()) as any;
+                              // preload the image
+                              let image = new Image();
+                              image.src = url;
+                              image.onload = () => {
+                                   resolve(url);
+                              };
+                              // No blob store configured
+
+                              console.log(`this upload api result: ${JSON.stringify(url)}`)
+                         } else if (res.status === 401) {
+                              resolve(file);
+                              throw new Error(
+                                   "`BLOB_READ_WRITE_TOKEN` environment variable not found, reading image locally instead.",
+                              );
+                              // Unknown error
+                         } else {
+                              throw new Error(`Error uploading image. Please try again.`);
+                         }
+                    }),
+                    {
+                         loading: "Uploading image...",
+                         success: "Image uploaded successfully.",
+                         error: (e) => e.message,
+                    },
+               );
+          });
      };
 
      return (
@@ -120,7 +164,7 @@ const PostForm = ({ post }: { post?: Post }) => {
                                                                       maxLength={150}
                                                                       onChange={(value) => setTitle(value.currentTarget.value)}
                                                                       className={cn(
-                                                                           "text-start h-min text-[32px] px-0 py-0 none-scroll-bar cursor-text font-semibold",
+                                                                           "text-start h-min text-[32px] px-0 py-0 none-scroll-bar focus:ring-0 focus-visible:ring-0 cursor-text font-semibold",
                                                                            englishBricolageGrotesqueFont.className,
                                                                       )} />
                                                             </div>
@@ -130,7 +174,21 @@ const PostForm = ({ post }: { post?: Post }) => {
                                              )}
                                         />
                                    </div>
-                                   <div className="w-full aspect-[6/3] rounded-[20px] bg-primary/[3%] hover:bg-primary/[6%] transition-all duration-500 cursor-pointer mb-[10px]"></div>
+                                   <div
+                                        onClick={() => {
+                                             // upload image
+                                             const input = document.createElement("input");
+                                             input.type = "file";
+                                             input.accept = "image/*";
+                                             input.onchange = async () => {
+                                                  if (input.files?.length) {
+                                                       const file = input.files[0];
+                                                       handlePostCover(file)
+                                                  }
+                                             };
+                                             input.click();
+                                        }}
+                                        className="w-full aspect-[6/3] rounded-[20px] bg-primary/[3%] hover:bg-primary/[6%] transition-all duration-500 cursor-pointer mb-[10px]"></div>
                                    <div className="pb-[35px]">
                                         <Editor initialValue={desc} onChange={setDesc} />
                                    </div>
@@ -155,7 +213,7 @@ const PostForm = ({ post }: { post?: Post }) => {
                                                        maxLength={100}
                                                        onChange={(value) => setSlug(value.currentTarget.value)}
                                                        className={cn(
-                                                            "text-start sm:text-[16px] py-[10px] leading-[1.5rem] h-min text-[32px] px-0 none-scroll-bar cursor-text",
+                                                            "text-start sm:text-[16px] py-[10px] leading-[1.5rem] h-min text-[32px] px-0 none-scroll-bar focus:ring-0 focus-visible:ring-0 cursor-text",
                                                             englishBricolageGrotesqueFont.className,
                                                        )}
                                                   />
@@ -167,18 +225,48 @@ const PostForm = ({ post }: { post?: Post }) => {
                                         </div>
                                         <div className="border-t-[1px] border-primary/10 h-min w-full flex items-end justify-end gap-x-[10px] px-[20px] py-[15px]">
                                              <Button
-                                                  onClick={() => handleSubmit({ title: title, desc: desc ?? defaultEditorValue, slug: slug === "" ? "post-slug" : slug, published: false, })}
+                                                  onClick={() => handleSubmit({
+                                                       title: title,
+                                                       desc: JSON.stringify(desc) ?? defaultEditorValue,
+                                                       slug: slug === "" ? generateRandomString(20) : slug,
+                                                       image: image,
+                                                       published: published,
+                                                  })}
                                                   disabled={isCreating || isUpdating}
                                                   variant="secondary"
                                                   size="sm">
                                                   Save the Post
                                              </Button>
-                                             <Button
-                                                  disabled={isCreating || isUpdating}
-                                                  variant="default"
-                                                  size="sm">
-                                                  Publish
-                                             </Button>
+
+                                             {post?.published ? (
+                                                  <Button
+                                                       onClick={() => handleSubmit({
+                                                            title: title,
+                                                            desc: JSON.stringify(desc) ?? defaultEditorValue,
+                                                            slug: slug === "" ? generateRandomString(20) : slug,
+                                                            image: image,
+                                                            published: false,
+                                                       })}
+                                                       disabled={isCreating || isUpdating}
+                                                       variant="secondary"
+                                                       size="sm">
+                                                       Published
+                                                  </Button>
+                                             ) : (
+                                                  <Button
+                                                       onClick={() => handleSubmit({
+                                                            title: title,
+                                                            desc: JSON.stringify(desc) ?? defaultEditorValue,
+                                                            slug: slug === "" ? generateRandomString(20) : slug,
+                                                            image: image,
+                                                            published: true,
+                                                       })}
+                                                       disabled={isCreating || isUpdating}
+                                                       variant="default"
+                                                       size="sm">
+                                                       Publish
+                                                  </Button>
+                                             )}
                                         </div>
                                    </div>
                               </div>

@@ -1,5 +1,5 @@
 export const site = {
-  name: "Omid Shabab",
+  name: "omidshabab.",
   url: "https://omidshabab.com",
   ogImage: "https://omidshabab.com/og.jpg",
   description: "Software Engineer",

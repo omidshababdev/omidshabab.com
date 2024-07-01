@@ -19,8 +19,8 @@ const PostSection = () => {
                </SidebarItem>
 
                <SidebarItem
-                    href={dashRoutes.editPost}
-                    active={segments[0] === "posts" && segments[1] === "edit" && id === null && true}>
+                    href={dashRoutes.createPost}
+                    active={segments[0] === "posts" && segments[1] === "create" && id === null && true}>
                     Add a new amazing Post
                </SidebarItem>
           </div>

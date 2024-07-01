@@ -4,11 +4,13 @@ import { LangDir, LangFont } from "@/lib/fonts";
 import { NextIntlClientProvider } from "next-intl";
 import { Toaster } from "@repo/ui/components/ui/sonner";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
-import { capitalize } from '@/lib/utils';
+import { GoogleAnalytics } from "@next/third-parties/google"
+import { Analytics } from '@vercel/analytics/react';
 import { cn } from "@repo/ui/lib/utils";
 import Providers from "@/components/ProvidersWrapper";
 
 import "@/styles/editor.css";
+import { env } from "@/lib/env.mjs";
 
 // Dynamic Metadata based on locales
 export async function generateMetadata(): Promise<Metadata> {
@@ -17,8 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: capitalize((await tGeneral)("dashboard")),
-      template: `%s - ${(await tMetadata)("name")}`,
+      default: `${(await tGeneral)("dashboard")} ,${(await tMetadata)("name")}`,
+      template: `%s, ${(await tMetadata)("name")}`,
     },
     description: (await tMetadata)("description"),
   }
@@ -55,6 +57,8 @@ export default async function RootLayout({
           </NextIntlClientProvider>
         </Providers>
       </body>
+      <Analytics />
+      <GoogleAnalytics gaId={env.GOOGLE_ANALYTICS_ID} />
     </html>
   );
 }

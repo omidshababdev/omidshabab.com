@@ -19,6 +19,9 @@
 .ProseMirror img {
   transition: filter 0.1s ease-in-out;
 
+  margin: 10px 0 30px 0 !important;
+  border-radius: 0px;
+
   &:hover {
     cursor: pointer;
     filter: brightness(90%);
@@ -139,7 +142,14 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
 }
 
 .ProseMirror h3 {
-  font-size: 25px;
+  font-size: 26px;
+  line-height: 2.5rem;
+  padding: 0 0 20px 0;
+  font-weight: 500;
+}
+
+.ProseMirror h4 {
+  font-size: 24px;
   line-height: 2.5rem;
   padding: 0 0 20px 0;
   font-weight: 500;
@@ -158,11 +168,6 @@ code, kbd, samp, pre {
   font-weight: 300;
   font-variation-settings: normal;
   font-size: 22px;
-}
-
-.textarea[contenteditable]:empty::before {
-  content: "Type the post title here ...";
-  color: gray;
 }
 
 .drag-handle {

@@ -5,21 +5,11 @@ import { redirect } from "next/navigation"
 
 // Dynamic Metadata based on locales
 export async function generateMetadata(): Promise<Metadata> {
-  const tRegister = getTranslations("register")
-  const tGeneral = getTranslations("general")
-
-  const locale = await getLocale() ?? "en"
+  const tMetadata = getTranslations("register_metadata")
 
   return {
-    title: (await tRegister)("title"),
-    description: (await tRegister)("description"),
-    openGraph: {
-      type: "website",
-      locale: locale,
-      title: (await tRegister)("title"),
-      description: (await tRegister)("description"),
-      siteName: (await tGeneral)("omidshabab"),
-    },
+    title: (await tMetadata)("title"),
+    description: (await tMetadata)("description"),
   }
 }
 

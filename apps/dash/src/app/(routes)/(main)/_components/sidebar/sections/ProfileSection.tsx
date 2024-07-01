@@ -10,12 +10,14 @@ const ProfileSection = () => {
       Profile
       <SidebarItem
         href={dashRoutes.profile}
-        active={segments[0] === "profile"}>
-        Edit your Profile Account
+        active={segments[0] === "profile" && segments[2] === undefined}>
+        Edit your Profile Details
       </SidebarItem>
 
-      <SidebarItem>
-        Settings of your Profile
+      <SidebarItem
+        href={dashRoutes.settings}
+        active={segments[0] === "profile" && segments[2] === "settings"}>
+        Settings of your Account
       </SidebarItem>
     </div>
   );

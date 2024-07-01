@@ -6,7 +6,7 @@ import {
 } from "@/lib/db/schema/posts";
 import { publicProcedure, router } from "../trpc";
 import { getPostById, getPostBySlug, getPosts } from "@/lib/api/posts/queries";
-import { createPost, updatePost } from "@/lib/api/posts/mutations";
+import { createPost, deletePost, updatePost } from "@/lib/api/posts/mutations";
 
 export const postsRouter = router({
   getPosts: publicProcedure.query(async () => {
@@ -36,7 +36,3 @@ export const postsRouter = router({
       return deletePost(input.id);
     }),
 });
-
-function deletePost(id: string): any {
-  throw new Error("Function not implemented.");
-}

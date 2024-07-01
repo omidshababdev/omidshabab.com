@@ -9,7 +9,7 @@ const Page = () => {
      const posts = trpc.posts.getPosts.useQuery().data?.posts;
 
      return (
-          <ScrollArea className="w-full h-full scroll-mx-12 none-scroll-bar overflow-y-hidden">
+          <ScrollArea className="w-full h-full none-scroll-bar overflow-y-hidden">
                <div className="flex flex-col flex-grow w-full h-full gap-y-[20px] mb-[35px]">
                     Your Created Posts
                     <div className="flex flex-col w-full">
@@ -27,7 +27,7 @@ const Page = () => {
                          </div>
 
                          {posts?.length === 0 &&
-                              <div className="flex w-full min-w-max h-full">
+                              <div className="flex w-full min-w-max h-full text-[16px] font-light text-slate-600">
                                    Not found any Post!
                               </div>}
                     </div>

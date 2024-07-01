@@ -1,0 +1,68 @@
+.prose {
+  font-size: unset !important;
+  line-height: initial !important;
+}
+
+.prose :where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *))  {
+  font-size: 30px !important;
+  line-height: 3rem !important;
+  padding: 0 0 20px 0 !important;
+  font-weight: 600 !important;
+}
+
+.prose :where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 28px !important;
+  line-height: 3rem !important;
+  font-weight: 500 !important;
+  padding: 0 0 20px 0;
+}
+
+.prose :where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 26px !important;
+  line-height: 2.5rem !important;
+  padding: 0 0 20px 0 !important;
+  font-weight: 500 !important;
+}
+
+.prose :where(h4):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 24px !important;
+  line-height: 2rem !important;
+  padding: 0 0 20px 0 !important;
+  font-weight: 500 !important;
+}
+
+.prose :where(p):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 22px !important;
+  line-height: 2.5rem !important;
+  margin-bottom: 0 !important;
+  padding: 0 0 20px 0 !important;
+  font-weight: 300 !important;
+}
+
+code, kbd, samp, pre {
+  font-family: inherit !important;
+  font-weight: 300 !important;
+}
+
+.prose > pre {
+  white-space: pre-wrap;
+}
+
+.prose > img {
+  margin: 10px 0 30px 0 !important;
+  border-radius: 0px !important;
+}
+
+/* -- TABLE OF CONTENTS COMPONENT -- */
+html {
+  scroll-behavior: smooth;
+}
+
+.toc ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.toc li {
+  margin: 0.5rem 0;
+}

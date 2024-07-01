@@ -1,9 +1,15 @@
 import { db } from "@/lib/db";
-import { posts } from "@/lib/db/schema/posts";
+import { Post, posts } from "@/lib/db/schema/posts";
 import { NextRequest, NextResponse } from "next/server";
+import { eq } from "drizzle-orm";
 
 export async function GET(request: NextRequest) {
-  const results = await db.select().from(posts);
+  const results: Post[] = await db
+    .select()
+    .from(posts)
+    .where(eq(posts.published, true));
 
-  return NextResponse.json(results, { status: 200 });
+  const getPosts = results.map(({ id, userId, ...rest }) => rest);
+
+  return NextResponse.json(getPosts, { status: 200 });
 }

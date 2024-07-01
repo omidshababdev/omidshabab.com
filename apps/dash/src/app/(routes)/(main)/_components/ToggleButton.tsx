@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from 'react'
+import * as React from "react"
 
 import { useSidebar } from '@/lib/hooks/useSidebar'
 import { Button } from '@repo/ui/components/ui/button'
@@ -15,8 +15,7 @@ const ToggleButton = () => {
                className="hidden size-9 md:flex py-[5px] px-[5px] sm:py-[5px] sm:px-[5px] border-0 text-text"
                onClick={() => {
                     toggleSidebar()
-               }}
-          >
+               }}>
                <PanelLeft className="size-5" />
           </Button>
      );

@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
      EditorRoot,
      EditorCommand,
@@ -10,18 +10,18 @@ import {
      type JSONContent,
      EditorCommandList,
      EditorBubble,
-} from "novel";
-import { ImageResizer, handleCommandNavigation } from "novel/extensions";
-import { defaultExtensions } from "./Extensions";
-import { NodeSelector } from "./selectors/NodeSelector";
-import { LinkSelector } from "./selectors/LinkSelector";
+} from "novel"
+import { ImageResizer, handleCommandNavigation } from "novel/extensions"
+import { defaultExtensions } from "./Extensions"
+import { NodeSelector } from "./selectors/NodeSelector"
+import { LinkSelector } from "./selectors/LinkSelector"
 
-import { TextButtons } from "./selectors/TextButtons";
-import { slashCommand, suggestionItems } from "./SlashCommand";
-import { handleImageDrop, handleImagePaste } from "novel/plugins";
-import { uploadFn } from "./ImageUpload";
+import { TextButtons } from "./selectors/TextButtons"
+import { slashCommand, suggestionItems } from "./SlashCommand"
+import { handleImageDrop, handleImagePaste } from "novel/plugins"
+import { uploadFn } from "./ImageUpload"
 
-const extensions = [...defaultExtensions, slashCommand];
+const extensions = [...defaultExtensions, slashCommand]
 
 interface EditorProp {
      initialValue?: JSONContent;
@@ -41,9 +41,9 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
                          handleDOMEvents: {
                               keydown: (_view, event) => handleCommandNavigation(event),
                          },
-                         // handlePaste: (view, event) => handleImagePaste(view, event, uploadFn),
-                         // handleDrop: (view, event, _slice, moved) =>
-                         //      handleImageDrop(view, event, moved, uploadFn),
+                         handlePaste: (view, event) => handleImagePaste(view, event, uploadFn),
+                         handleDrop: (view, event, _slice, moved) =>
+                              handleImageDrop(view, event, moved, uploadFn),
                          attributes: {
                               class: `prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full cursor-text`,
                          },
@@ -51,8 +51,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
                     onUpdate={({ editor }) => {
                          onChange(editor.getJSON());
                     }}
-               // slotAfter={<ImageResizer />}
-               >
+                    slotAfter={<ImageResizer />}>
                     <EditorCommand className="z-50 none-scroll-bar w-[160px] h-auto max-h-[300px] overflow-y-auto rounded-[15px] bg-primary/10 backdrop-blur-3xl border-[1px] border-primary/20 px-[5px] py-[5px] transition-all">
                          <EditorCommandEmpty className="px-[20px] text-text">
                               No results

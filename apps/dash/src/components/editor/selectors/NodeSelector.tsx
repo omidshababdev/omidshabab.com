@@ -4,6 +4,7 @@ import {
      Heading1,
      Heading2,
      Heading3,
+     Heading4,
      TextQuote,
      ListOrdered,
      TextIcon,
@@ -54,6 +55,13 @@ const items: SelectorItem[] = [
           command: (editor) =>
                editor.chain().focus().clearNodes().toggleHeading({ level: 3 }).run(),
           isActive: (editor) => editor.isActive("heading", { level: 3 }),
+     },
+     {
+          name: "Heading 4",
+          icon: Heading4,
+          command: (editor) =>
+               editor.chain().focus().clearNodes().toggleHeading({ level: 4 }).run(),
+          isActive: (editor) => editor.isActive("heading", { level: 4 }),
      },
      // {
      //      name: "To-do List",

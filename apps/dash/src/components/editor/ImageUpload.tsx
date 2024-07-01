@@ -1,7 +1,7 @@
 import { createImageUpload } from "novel/plugins";
 import { toast } from "sonner";
 
-const onUpload = (file: File) => {
+export const onUpload = (file: File) => {
      const promise = fetch("/api/upload", {
           method: "POST",
           headers: {
@@ -24,6 +24,8 @@ const onUpload = (file: File) => {
                               resolve(url);
                          };
                          // No blob store configured
+
+                         console.log(`this upload api result: ${JSON.stringify(url)}`)
                     } else if (res.status === 401) {
                          resolve(file);
                          throw new Error(

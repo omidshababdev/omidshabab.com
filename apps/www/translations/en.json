@@ -1,0 +1,23 @@
+{
+  "general": {
+    "omidshabab": "omidshabab",
+    "omid shabab": "omid shabab",
+    "site_name": "omidshabab."
+  },
+  "home_page": {
+    "title": "omidshabab.",
+    "desc": ""
+  },
+  "blog_page": {
+    "title": "blog",
+    "desc": ""
+  },
+  "home_metadata": {
+    "title": "software",
+    "desc": ""
+  },
+  "blog_metadata": {
+    "title": "blog",
+    "desc": ""
+  }
+}

@@ -1,6 +1,7 @@
 import { getUserAuth } from "@/lib/auth/utils";
 import { db } from "@/lib/db/index";
 import {
+  Post,
   PostId,
   postIdSchema,
   posts,
@@ -16,7 +17,7 @@ export const getPosts = async () => {
     .from(posts)
     .where(eq(posts.userId, session?.user.id!));
 
-  const t = rows;
+  const t: Post[] = rows;
   return { posts: t };
 };
 

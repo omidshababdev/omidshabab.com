@@ -1,9 +1,10 @@
 {
+  "name": "omidshabab.com",
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "turbo": "latest"
+    "turbo": "^2.0.3"
   },
   "engines": {
     "node": ">=18"
@@ -21,8 +22,5 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "dependencies": {
-    "next-intl": "^3.14.0"
-  }
+  ]
 }

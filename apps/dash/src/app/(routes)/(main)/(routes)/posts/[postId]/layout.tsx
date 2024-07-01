@@ -1,19 +1,30 @@
-import { capitalize } from '@/lib/utils'
+import { PostId } from '@/lib/db/schema/posts'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import React from 'react'
 
 // Dynamic Metadata based on locales
-export async function generateMetadata(): Promise<Metadata> {
-     const tRegister = getTranslations("register")
+export async function generateMetadata({
+     params: {
+          postId
+     }
+}: {
+     params: {
+          postId: PostId
+     }
+}): Promise<Metadata> {
      const tGeneral = getTranslations("general")
 
+     const getTitle = async () => {
+          if (postId === "create") {
+               return (await tGeneral)("create")
+          } else {
+               return (await tGeneral)("edit")
+          }
+     }
+
      return {
-          title: {
-               default: capitalize((await tGeneral)("dashboard")),
-               template: `%s - ${(await tGeneral)("name")}`,
-          },
-          description: (await tRegister)("description"),
+          title: await getTitle(),
+          description: (await tGeneral)("lorem"),
      }
 }
 

@@ -15,6 +15,7 @@ const GithubButton = ({
           <div className="aspect-square">
                <IconButton
                     onClick={() => onClick}
+                    animateOnHover
                     disabled={disabled}>
                     <GithubIcon className="h-7 sm:h-9 aspect-square text-orange-600" />
                </IconButton>

@@ -1,5 +1,5 @@
 {
-  "id": "c853d6ce-2755-47b9-bf66-8e15e15d0624",
+  "id": "f57bdbb8-3899-456f-93e4-eca31e6d30dd",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -164,25 +164,31 @@
           "name": "title",
           "type": "varchar(150)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "desc": {
           "name": "desc",
           "type": "json",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
         },
         "slug": {
           "name": "slug",
           "type": "varchar(100)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "published": {
           "name": "published",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": false
         },
         "user_id": {
